@@ -27,19 +27,19 @@
 		<testng.verbosity>1</testng.verbosity>
 	</properties>
 
-    <distributionManagement>
-       <snapshotRepository>
-          <id>local_nexus_snapshots</id>
-          <name>Local Nexus Snapshots</name>
-          <url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
-       </snapshotRepository>
-       
-       <repository>
-          <id>local_nexus_releases</id>
-          <name>Local Nexus Releases</name>
-          <url>http://localhost:8081/nexus/content/repositories/releases/</url>
-       </repository>
-    </distributionManagement>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>local_nexus_snapshots</id>
+			<name>Local Nexus Snapshots</name>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+
+		<repository>
+			<id>local_nexus_releases</id>
+			<name>Local Nexus Releases</name>
+			<url>http://localhost:8081/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
 
 	<organization>
 		<name>VMWare</name>
@@ -131,6 +131,17 @@
 			</testResource>
 		</testResources>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+		             <formats>
+		                <format>html</format>
+		                <format>xml</format>
+		             </formats>		
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -247,14 +258,14 @@
 			<id>debug</id>
 			<!-- NEW: Activation trigger with a 'and' relationship -->
 			<activation>
-			   <jdk>1.8</jdk>
-			   <os>
-			     <family>Linux</family>
-			   </os>
-			   <property>
-			      <name>coffee.preference</name>
-			      <value>Latte</value>
-			   </property>
+				<jdk>1.8</jdk>
+				<os>
+					<family>Linux</family>
+				</os>
+				<property>
+					<name>coffee.preference</name>
+					<value>Latte</value>
+				</property>
 			</activation>
 			<build>
 				<plugins>
