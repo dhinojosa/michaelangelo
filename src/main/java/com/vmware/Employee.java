@@ -1,7 +1,6 @@
 package com.vmware;
 
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class Employee {
 	private String name;
@@ -32,5 +31,9 @@ public class Employee {
 
 	public String getSocialSecurityNumber() {
 		return ssn;
+	}
+
+	public void addTask(Task task) {
+		// TODO Auto-generated method stub
 	}
 }
