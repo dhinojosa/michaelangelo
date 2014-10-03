@@ -7,7 +7,12 @@ import java.util.regex.Matcher;
 public class Employee {
 	private String name;
 	private String ssn;
-
+    private Pattern pattern;
+    
+	public Employee() {
+		pattern = Pattern.compile("\\d{3}-\\d{2}-\\d{4}");	
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -17,9 +22,7 @@ public class Employee {
 	}
 
 	public void setSocialSecurityNumber(String ssn) {
-		Pattern pattern = Pattern.compile("\\d{3}-\\d{2}-\\d{4}");
-		Matcher matcher = pattern.matcher(ssn);
-		if (!(matcher.matches())) 
+		if (!(pattern.matcher(ssn).matches())) 
 			throw new IllegalArgumentException(ssn + " is not a valid social security number");
 		this.ssn = ssn;
 	}
