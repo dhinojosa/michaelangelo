@@ -6,4 +6,5 @@
 *.iml
 pom.xml.versionsBackup
 target/
+test-output/
 
