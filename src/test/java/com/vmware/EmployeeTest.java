@@ -33,7 +33,24 @@ public class EmployeeTest {
 		employee.setSocialSecurityNumber("123-45-6710");
 		assertEquals(employee.getSocialSecurityNumber(), "123-45-6710");
 	}
+	
+	@Test
+	public void fixDE30201_SocialSecurityMustBeACertainFormat() {
+		String badSSN = "RamLikesThe49ers";
+		Employee employee = new Employee();
+		try {
+		   employee.setSocialSecurityNumber(badSSN);
+		   fail("This line should never have been reached");
+		} catch (IllegalArgumentException iae) {
+		   assertEquals(iae.getMessage(), "RamLikesThe49ers is not a valid social security number");
+		}
+	}
 }
+
+
+
+
+
 
 
 
