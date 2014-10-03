@@ -3,16 +3,15 @@ package com.vmware;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-
 public class Employee {
 	private String name;
 	private String ssn;
-    private Pattern pattern;
-    
+	private Pattern pattern;
+
 	public Employee(Pattern pattern) {
-		this.pattern = pattern;	
+		this.pattern = pattern;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -22,8 +21,12 @@ public class Employee {
 	}
 
 	public void setSocialSecurityNumber(String ssn) {
-		if (!(pattern.matcher(ssn).matches())) 
-			throw new IllegalArgumentException(ssn + " is not a valid social security number");
+		if (ssn.trim().equals(""))
+			throw new IllegalArgumentException(
+					"social security number cannot be blank");
+		if (!(pattern.matcher(ssn).matches()))
+			throw new IllegalArgumentException(ssn
+					+ " is not a valid social security number");
 		this.ssn = ssn;
 	}
 
@@ -31,14 +34,3 @@ public class Employee {
 		return ssn;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

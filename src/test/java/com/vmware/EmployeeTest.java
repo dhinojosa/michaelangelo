@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import org.junit.Before;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 //F2 Brings up the helper
@@ -20,7 +21,6 @@ public class EmployeeTest {
 	
 	@BeforeMethod
 	public void setUp() {
-	   System.out.println("Construct a new Employee per test");
 	   employee = new Employee(Pattern.compile("\\d{3}-\\d{2}-\\d{4}"));	
 	}
 	
@@ -43,14 +43,27 @@ public class EmployeeTest {
 		assertEquals(employee.getSocialSecurityNumber(), "123-45-6710");
 	}
 	
-	@Test
-	public void fixDE30201_SocialSecurityMustBeACertainFormat() {
-		String badSSN = "RamLikesThe49ers";
+	
+	@DataProvider(name="badSSNs")
+	public Object[][] badSSNProvider() {
+		return new Object[][] {
+				{"djajssjs", "djajssjs is not a valid social security number"},
+				{"RamLikesThe49ers", "RamLikesThe49ers is not a valid social security number"},
+				{"1", "1 is not a valid social security number"},
+				{"19", "19 is not a valid social security number"},
+				{"   ", "social security number cannot be blank"},
+				{"", "social security number cannot be blank"}
+		};
+	}
+	
+	
+	@Test(dataProvider="badSSNs")
+	public void fixDE30201_SocialSecurityMustBeACertainFormat(String badSSN, String expectedMessage) {
 		try {
 		   employee.setSocialSecurityNumber(badSSN);
 		   fail("This line should never have been reached");
 		} catch (IllegalArgumentException iae) {
-		   assertEquals(iae.getMessage(), "RamLikesThe49ers is not a valid social security number");
+		   assertEquals(iae.getMessage(), expectedMessage);
 		}
 	}
 }
