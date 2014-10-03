@@ -1,7 +1,15 @@
 package com.vmware;
 
 public class Task {
+	private int expectedDays;
+	private int actualDays;
+
 	public Task(String name, int expectedDays, int actualDays) {
-		// TODO Auto-generated constructor stub
+		this.expectedDays = expectedDays;
+		this.actualDays = actualDays;
+	}
+
+	public int getDifference() {
+		return actualDays - expectedDays;
 	}
 }

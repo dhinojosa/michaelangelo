@@ -32,6 +32,13 @@ public class EmployeeTest {
 	}
 	
 	@Test
+	public void testToString() {
+		String name = "Ricardo Montalban";
+		employee.setName(name);
+		assertEquals(employee.toString(), "Employee[Ricardo Montalban]");
+	}
+	
+	@Test
 	public void addASocialSecurityNumber() {
 		employee.setSocialSecurityNumber("123-45-6789");
 		assertEquals(employee.getSocialSecurityNumber(), "123-45-6789");
@@ -65,6 +72,31 @@ public class EmployeeTest {
 		} catch (IllegalArgumentException iae) {
 		   assertEquals(iae.getMessage(), expectedMessage);
 		}
+	}
+	
+	@Test
+	public void calculateAverageRam() {
+		//ALT_SHIFT_A = Column Mode
+		employee.setName("Ram");
+		employee.addTask(new Task("Fix Bug",        4, 4)); //0
+		employee.addTask(new Task("Changed Header", 1, 3)); //2
+		employee.addTask(new Task("Fix Major Bug",  5, 1)); //-4
+		employee.addTask(new Task("Fixed DE10203",  2, 3)); //1
+		                                                    //avg: -.25
+		
+		assertEquals(employee.getPerformanceAverage(), -.25, 0.0);
+	}
+	
+	@Test
+	public void calculateAverageNipuna() {
+		employee.setName("Nipuna");
+		employee.addTask(new Task("Fix Major Bug",  2,  2)); //0
+		employee.addTask(new Task("Changed Header", 10, 1)); //-9
+		employee.addTask(new Task("Fix Major Bug",  4,  2)); //-2
+		employee.addTask(new Task("Fixed DE10204",  2,  2)); //0
+		                                                      //avg -2.75
+	
+		assertEquals(employee.getPerformanceAverage(), -2.75, 0.0);
 	}
 }
 

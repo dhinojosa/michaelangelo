@@ -1,17 +1,31 @@
 package com.vmware;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
 public class EmployeePerformanceService {
-
-	public void addEmployee(Employee employee1) {
-		// TODO Auto-generated method stub	
+    private List<Employee> employeeList;
+    private Comparator<Employee> comparator;
+    
+    public EmployeePerformanceService() {
+    	employeeList = new ArrayList<Employee>();
+        comparator = new Comparator<Employee>() {
+			@Override
+			public int compare(Employee o1, Employee o2) {
+				return new Double(o1.getPerformanceAverage()).compareTo(o2.getPerformanceAverage());
+			}
+        };
+    }
+    
+	public void addEmployee(Employee employee) {
+		employeeList.add(employee);	
 	}
 
 	public List<Employee> getTop2Performers() {
-		// TODO Auto-generated method stub
-		return null;
+		Collections.sort(employeeList, comparator);
+		return employeeList.subList(0,2); 
 	}
-
 }
